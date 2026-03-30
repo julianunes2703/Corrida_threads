@@ -16,7 +16,9 @@ O programa cria múltiplas threads, onde cada thread:
 - Compilador GCC
 - Biblioteca `pthread`
 
-## Exemplo de Saída 
+## Exemplo de Saída
+
+```text
 Quantidade de threads (aleatória): 6
 
 Thread 1 -> 0
@@ -27,6 +29,7 @@ Thread 4 -> 99
 
 RESULTADO
 A thread vencedora foi: Thread 4
+```
 
 ## Funcionamento Geral 
 - O programa define a quantidade de threads 
