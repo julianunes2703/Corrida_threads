@@ -11,10 +11,18 @@ O programa cria múltiplas threads, onde cada thread:
 - ao finalizar, disputa para ser registrada como a vencedora;
 - vence a thread que concluir sua execução primeiro.
 
+## Estrutura do Projeto
+
+O projeto possui duas versões do programa:
+
+- `main.c` → versão **sem mutex**, usada para demonstrar o problema de **condição de corrida**
+- `main_mutex.c` → versão **com mutex**, usada para garantir sincronização correta na definição da thread vencedora
+
 ## Requisitos
 
 - Compilador GCC
 - Biblioteca `pthread`
+- Linux, Git Bash, WSL ou outro ambiente com suporte a POSIX Threads
 
 ## Exemplo de Saída
 
@@ -31,19 +39,22 @@ RESULTADO
 A thread vencedora foi: Thread 4
 ```
 
-## Funcionamento Geral 
-- O programa define a quantidade de threads 
-- Todas as threads são criadas
-- Elas aguardam na barreira até que todas estejam prontas
-- Após a liberação, iniciam a execução simultaneamente
-- Cada thread imprime sua contagem
-- A primeira a finalizar é registrada como vencedora
+
 
 ## Compilação e Execução
 
 ```bash
-make
-make run
+# Compilar a versão sem mutex
+make sem_mutex
 
+# Executar a versão sem mutex
+make run_sem_mutex
 
+# Compilar a versão com mutex
+make mutex
 
+# Executar a versão com mutex
+make run_mutex
+
+# Remover arquivos gerados
+make clean
