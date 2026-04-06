@@ -9,12 +9,13 @@ typedef struct {
     pthread_barrier_t *barreira_inicio;
 } ArgumentosThread;
 
-static pthread_mutex_t mutex_vencedor = PTHREAD_MUTEX_INITIALIZER;
+
 static int id_vencedor = -1;
 
 void *executar_corrida(void *arg) {
     ArgumentosThread *args = (ArgumentosThread *)arg;
 
+    // Sincroniza início
     pthread_barrier_wait(args->barreira_inicio);
 
     for (int i = 0; i < 100; i++) {
@@ -22,11 +23,10 @@ void *executar_corrida(void *arg) {
         fflush(stdout);
     }
 
-    pthread_mutex_lock(&mutex_vencedor);
+    
     if (id_vencedor == -1) {
         id_vencedor = args->id;
     }
-    pthread_mutex_unlock(&mutex_vencedor);
 
     return NULL;
 }
@@ -84,10 +84,9 @@ int main(int argc, char *argv[]) {
     }
 
     printf("\nRESULTADO\n");
-    printf("A thread vencedora foi: Thread %d\n", id_vencedor);
+    printf("A  thread que venceu foi: Thread %d\n", id_vencedor);
 
     pthread_barrier_destroy(&barreira_inicio);
-    pthread_mutex_destroy(&mutex_vencedor);
     free(threads);
     free(args);
 
